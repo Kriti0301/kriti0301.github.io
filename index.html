@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kriti Jodhani, Software Developer</title>
+<meta name="description" content="Kriti Jodhani, software developer: React, Java/Spring Boot, Node.js, Python and serverless AWS. Master of Applied Computer Science, Dalhousie University. Open to roles across Canada.">
+<meta property="og:title" content="Kriti Jodhani, Software Developer">
+<meta property="og:description" content="My jobs and projects as a transit map: every line is a skill, every station is something I built.">
+<meta property="og:url" content="https://kriti0301.github.io/">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='2' y='9' width='28' height='5' rx='2.5' fill='%231F6FD1'/%3E%3Crect x='2' y='18' width='28' height='5' rx='2.5' fill='%231E9E6A'/%3E%3Crect x='10' y='3' width='12' height='26' rx='6' fill='white' stroke='%231A1F29' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF1F4; --map:#FFFFFF; --ink:#1A1F29; --muted:#5E6878; --rule:#D5DBE3;
+  --fe:#1F6FD1; --cloud:#F08A00; --java:#D23A3A; --node:#7A4CC7; --data:#1E9E6A;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#11151C; --map:#181E28; --ink:#E8ECF2; --muted:#9AA4B4; --rule:#2A3342; }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 "Overpass",system-ui,sans-serif}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--fe);outline-offset:2px}
+.wrap{max-width:1240px;margin:0 auto;padding:28px 24px 48px}
+
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 32px}
+.sign{display:flex;align-items:center;gap:24px}
+.sign .mark{width:22px;height:46px;border-radius:11px;border:4px solid var(--ink);background:var(--map);flex:none;position:relative}
+.sign .mark::before,.sign .mark::after{content:"";position:absolute;left:-14px;right:-14px;height:6px;border-radius:3px;z-index:-1}
+.sign .mark::before{top:9px;background:var(--fe)}.sign .mark::after{bottom:9px;background:var(--data)}
+.sign{position:relative;isolation:isolate;padding-left:12px}
+h1{margin:0;font-size:clamp(30px,4.5vw,46px);font-weight:800;letter-spacing:-.01em;line-height:1}
+.tag{color:var(--muted);margin-top:6px;font-size:17px}
+.contact{display:flex;gap:10px;flex-wrap:wrap}
+.contact a{font-weight:600;text-decoration:none;border:2px solid var(--ink);border-radius:999px;padding:7px 16px 5px;font-size:15px}
+.contact a.pri{background:var(--ink);color:var(--map)}
+
+.legend{display:flex;flex-wrap:wrap;gap:8px 22px;margin:26px 0 14px;font-size:15px}
+.legend button{display:flex;align-items:center;gap:8px;background:none;border:0;padding:4px 0;font:inherit;color:var(--ink);cursor:pointer}
+.legend i{width:30px;height:7px;border-radius:4px;display:block}
+.legend button[aria-pressed="false"]{opacity:.35}
+
+.board{display:grid;grid-template-columns:1fr;gap:18px;align-items:start}
+@media (min-width:1000px){.board{grid-template-columns:1fr 310px}}
+.mapcard{background:var(--map);border:1px solid var(--rule);border-radius:16px;padding:10px;overflow-x:auto}
+svg{display:block;width:100%;min-width:760px;height:auto}
+.ln{fill:none;stroke-width:7;stroke-linecap:round;stroke-linejoin:round;transition:opacity .2s}
+.ln.dim{opacity:.12}
+.stn{cursor:pointer}
+.stn rect{fill:var(--map);stroke:var(--ink);stroke-width:3.5}
+.stn:hover rect,.stn.on rect{fill:var(--ink)}
+.stn text{font:600 17px "Overpass",sans-serif;fill:var(--ink)}
+.stn .yr{font-weight:400;font-size:14px;fill:var(--muted)}
+.stn.job text.nm{font-weight:800}
+.stn:focus-visible rect{stroke:var(--fe);stroke-width:5}
+.end text{font:800 18px "Overpass",sans-serif;fill:var(--ink)}
+.axis text{font:600 13px "Overpass";fill:var(--muted)}
+.axis line{stroke:var(--rule);stroke-dasharray:3 5}
+
+.panel{background:var(--map);border:1px solid var(--rule);border-radius:16px;padding:22px 22px 24px;align-self:start}
+.panel .kind{font-size:13.5px;color:var(--muted)}
+.panel h2{margin:4px 0 0;font-size:26px;font-weight:800;line-height:1.15}
+.panel .lines{display:flex;gap:6px;margin:12px 0 0;flex-wrap:wrap}
+.panel .lines span{font-size:12.5px;font-weight:600;color:#fff;border-radius:999px;padding:3px 10px 1px}
+.panel p{margin:14px 0 0}
+.panel ul{margin:12px 0 0;padding-left:18px}
+.panel li{margin:3px 0}
+.panel .go{display:inline-block;margin-top:16px;font-weight:600}
+.hint{color:var(--muted);font-size:14px;margin-top:10px}
+
+.stops{display:none;margin-top:14px}
+.stops h2{font-size:15px;margin:0 0 8px;color:var(--muted);font-weight:600}
+.stops div{display:flex;flex-wrap:wrap;gap:8px}
+.stops button{font:600 14px "Overpass",sans-serif;color:var(--ink);background:var(--map);border:2px solid var(--ink);border-radius:999px;padding:6px 13px 4px;cursor:pointer}
+.stops button.on{background:var(--ink);color:var(--map)}
+@media (max-width:999px){.stops{display:block}}
+.panel .meta{margin-top:16px;padding-top:14px;border-top:1px solid var(--rule);font-size:15px;color:var(--muted)}
+.panel .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.panel .btns a{font-weight:600;text-decoration:none;border:2px solid var(--ink);border-radius:999px;padding:7px 15px 5px;font-size:15px}
+.panel .btns a.pri{background:var(--ink);color:var(--map)}
+.end{cursor:pointer}
+footer{margin-top:28px;color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <div class="sign"><div class="mark" aria-hidden="true"></div><h1>Kriti Jodhani</h1></div>
+      <p class="tag">Software developer. Every station is a job or project; every line is a skill I've used there.</p>
+    </div>
+    <div class="contact">
+      <a class="pri" href="mailto:kritipatel013@gmail.com">Email me</a>
+      <a href="https://github.com/Kriti0301">GitHub</a>
+    </div>
+  </header>
+
+  <div class="legend" id="legend" aria-label="Filter lines"></div>
+
+  <div class="board">
+    <div class="mapcard"><svg id="map" viewBox="20 0 1080 560" role="img" aria-label="Transit map of Kriti's career and projects"></svg></div>
+    <aside class="panel" id="panel" aria-live="polite"></aside>
+  </div>
+  <nav class="stops" aria-label="Stations"><h2>Stations</h2><div id="stops"></div></nav>
+  <p class="hint">Click a station, or a line name to show only that line. Stations run roughly left to right in time.</p>
+  <footer>Brandon, Manitoba. Open to software developer roles across Canada</footer>
+</div>
+
+<script>
+const GH="https://github.com/Kriti0301/";
+const LINES={
+  fe:{name:"Frontend (React, JS, TS)",color:"var(--fe)",lane:-12},
+  node:{name:"Node.js",color:"var(--node)",lane:-4},
+  java:{name:"Java / Spring Boot",color:"var(--java)",lane:-4},
+  cloud:{name:"AWS cloud",color:"var(--cloud)",lane:4},
+  data:{name:"Python, SQL & data",color:"var(--data)",lane:12},
+};
+const S={
+  intern:{x:70,y:280,name:"Microvista",yr:"Intern 2022",job:1,lines:["fe","data"],kind:"Software Developer Intern, Nov 2022 – May 2023",
+    body:"<p>My first developer role, at Microvista Technologies in Ahmedabad.</p><ul><li>Features and bug fixes in JavaScript, C# and Python applications</li><li>Code reviews, deployment validation and production incident triage</li></ul>"},
+  dev:{x:190,y:280,name:"Microvista",yr:"Developer 2023–24",job:1,lines:["fe","data"],kind:"Software Developer, Jun 2023 – Oct 2024",
+    body:"<ul><li>Developed and maintained two production web platforms</li><li>Sole developer on a workforce management platform for about 200 employees</li><li>Cut a financial data validation pipeline from about 7–8 minutes to about 1 minute</li><li>Improved query performance by 20–30% across three production databases</li></ul>"},
+  hr:{x:300,y:420,name:"HR Analytics",yr:"",lines:["data"],kind:"Data project",
+    body:"<p>Attrition dashboards for 1,470 employees in Power BI and Excel, with every number checked in PostgreSQL.</p>",repo:"Hr_analytics"},
+  diab:{x:400,y:480,name:"Diabetes Prediction",yr:"",lines:["data"],kind:"Machine learning project",
+    body:"<p>Exploratory analysis, data cleaning and a KNN classifier on the Pima diabetes dataset: <b>74.7% accuracy</b>, F1 0.64. Includes a Power BI dashboard.</p>",repo:"Diabetes_dataset_prediction"},
+  dalhousie:{x:330,y:120,name:"Dalhousie University",yr:"2025–26",job:1,lines:["fe","java"],kind:"Master of Applied Computer Science, Jan 2025 – May 2026",
+    body:"<p>Graduate degree in applied computer science. Most of the projects on this map were built here, many in teams.</p>"},
+  market:{x:470,y:200,name:"DalMarketplace",yr:"Winter 2025",lines:["fe","java"],kind:"E-commerce marketplace, team project",
+    body:"<p>Listings, cart and Stripe checkout, bidding, reviews and real-time chat.</p><ul><li>Spring Boot REST API with JWT security, MySQL</li><li>React frontend, WebSocket chat</li><li>JUnit and Mockito tests; GitLab CI/CD with Docker</li></ul>",repo:"Dalmarketplace"},
+  hello:{x:590,y:280,name:"HelloDoc",yr:"Summer 2025",lines:["fe","node"],kind:"Telehealth platform, team of six",
+    body:"<p>Appointments, WebRTC video consultations and chat.</p><p><b>What I built:</b></p><ul><li>Backend auth: JWT access and refresh tokens, roles</li><li>Patient profiles and validated document uploads</li><li>Health records, prescriptions, doctor credential checks</li></ul>",repo:"Hellodocc"},
+  scooter:{x:700,y:360,name:"DALScooter",yr:"Summer 2025",lines:["fe","cloud","data"],kind:"Serverless scooter rental, team project",
+    body:"<p>Rentals, fleet management, chat, feedback and analytics.</p><ul><li>About 30 Python Lambda functions behind API Gateway</li><li>DynamoDB, Cognito, SNS and SQS, all in CloudFormation</li><li>React frontend with Mapbox; Dialogflow chatbot</li></ul>",repo:"Dalscooter"},
+  telemed:{x:760,y:120,name:"Telemed Messaging API",yr:"Oct 2025",lines:["java"],kind:"REST API, built solo",
+    body:"<p>Patient-doctor messaging in consultations. Java 21, Spring Boot and MongoDB, with validation, indexed queries and clear error responses.</p>",repo:"Telemed_messages"},
+  expense:{x:810,y:280,name:"ExpenseTracker",yr:"Fall 2025",lines:["fe","node","cloud"],kind:"Serverless expense tracker",
+    body:"<p>Upload a receipt and AWS Textract reads the total. Node.js Lambdas, DynamoDB, S3, EventBridge monthly reports, CloudFormation.</p>",repo:"ExpenseTracker"},
+  course:{x:900,y:360,name:"Course Resource Manager",yr:"Dec 2025",lines:["fe","cloud","data"],kind:"Serverless file sharing, Terraform",
+    body:"<p>Professors upload materials; students download through secure S3 links and get email alerts. Python Lambdas in a private VPC, all infrastructure in Terraform.</p>",repo:"Course_Resource_Management_System"},
+  hrm:{x:900,y:480,name:"Halifax Regional Municipality",yr:"2026",job:1,lines:["data"],kind:"Software Business Analytics Developer (Co-op), Jan – Apr 2026",
+    body:"<ul><li>Python backend services and JSON data pipelines across 5+ municipal data sources</li><li>Resolved production data issues with SQL diagnostics</li><li>Power BI dashboards, requirements and technical documentation</li></ul>"},
+};
+const ROUTES={
+  fe:["intern","dev","dalhousie","market","hello","scooter","expense","course","END"],
+  data:["intern","dev","hr","diab","scooter","course","hrm","END"],
+  java:["dalhousie","market","telemed","END"],
+  node:["hello","expense","END"],
+  cloud:["scooter","expense","course","END"],
+};
+const END={x:1030,y:280};
+
+function pt(id,line){ if(id==="END") return {x:END.x,y:END.y+LINES[line].lane}; const s=S[id]; return {x:s.x,y:s.y+LINES[line].lane}; }
+// transit-style segment: straight then 45°
+function seg(a,b){
+  const dx=b.x-a.x, dy=b.y-a.y, adx=Math.abs(dx), ady=Math.abs(dy);
+  if(ady===0||adx===0) return `L${b.x},${b.y}`;
+  if(adx>=ady){ const mx=b.x-Math.sign(dx)*ady; const m1=a.x+(mx-a.x)/2;
+    return `L${m1},${a.y} L${m1+Math.sign(dx)*ady},${b.y} L${b.x},${b.y}`; }
+  const my=b.y-Math.sign(dy)*adx; return `L${a.x},${(a.y+my)/2} L${b.x},${(a.y+my)/2+Math.sign(dy)*adx} L${b.x},${b.y}`;
+}
+const svg=document.getElementById("map"), NS="http://www.w3.org/2000/svg";
+const el=(t,a,p=svg)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e;};
+
+// time axis
+const ax=el("g",{class:"axis"});
+[["2022",70],["2023–24",190],["2025",470],["Summer 2025",650],["Late 2025",810],["2026",900],["Next",1030]].forEach(([t,x])=>{ el("line",{x1:x,y1:30,x2:x,y2:540},ax); el("text",{x:x,y:18,"text-anchor":"middle"},ax).textContent=t; });
+
+// lines
+const lineEls={};
+for(const [k,r] of Object.entries(ROUTES)){
+  let d=""; r.forEach((id,i)=>{ const p=pt(id,k); d+= i? " "+seg(pt(r[i-1],k),p) : `M${p.x},${p.y}`; });
+  lineEls[k]=el("path",{d,class:"ln",stroke:LINES[k].color});
+}
+// end station
+const eg=el("g",{class:"end"});
+el("rect",{x:END.x-14,y:END.y-24,width:28,height:48,rx:14,fill:"var(--ink)"},eg);
+const et=el("text",{x:END.x,y:END.y-36,"text-anchor":"middle"},eg); et.textContent="Your team?";
+
+// stations
+const ids=Object.keys(S);
+ids.forEach(id=>{
+  const s=S[id], lanes=s.lines.map(l=>LINES[l].lane), lo=Math.min(...lanes), hi=Math.max(...lanes);
+  const g=el("g",{class:"stn"+(s.job?" job":""),tabindex:0,role:"button","aria-label":s.name+(s.yr?", "+s.yr:""),"data-id":id});
+  el("rect",{x:s.x-11,y:s.y+lo-11,width:22,height:hi-lo+22,rx:11},g);
+  const L = {dev:{above:1,anchor:"end",dx:-10}, course:{above:0,anchor:"start",dx:16,dy:-6,label:"Course Resources"}}[id] || {};
+  const above = L.above!==undefined ? !!L.above : (s.y<250 || ["hello","expense"].includes(id));
+  const ty = (above ? s.y+lo-36 : s.y+hi+34) + (L.dy||0);
+  const tx = s.x + (L.dx||0), anc = L.anchor||"middle";
+  const t=el("text",{x:tx,y:ty,"text-anchor":anc,class:"nm"},g); t.textContent=L.label||s.name;
+  if(s.yr){ const y=el("text",{x:tx,y:ty+18,"text-anchor":anc,class:"yr"},g); y.textContent=s.yr; }
+  g.addEventListener("click",()=>show(id));
+  g.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){e.preventDefault();show(id);} });
+});
+
+const panel=document.getElementById("panel");
+const ABOUT=`<div class="kind">Start here</div><h2>Hi, I'm Kriti</h2>
+  <p>I'm a software developer with a <b>Master of Applied Computer Science from Dalhousie University</b> and two years of professional development experience. I build React front ends, Java and Node.js APIs, Python data pipelines and serverless systems on AWS.</p>
+  <p>This map shows where I've used each skill. Click any station to see what I built there.</p>
+  <div class="meta">Currently a Technical Support Expert at Teleperformance (since July 2026), and looking for my next developer role. Based in Brandon, Manitoba.</div>`;
+const CONTACT=`<div class="kind">Next stop</div><h2>Your team?</h2>
+  <p>I'm looking for a software developer role anywhere in Canada. The fastest way to reach me is email.</p>
+  <div class="btns"><a class="pri" href="mailto:kritipatel013@gmail.com">kritipatel013@gmail.com</a><a href="https://github.com/Kriti0301">GitHub</a></div>`;
+function setHash(id){ try{ if(location.hash.slice(1)!==id) history.replaceState(null,"","#"+id); }catch(e){} }
+function getHash(){ try{ return location.hash.slice(1); }catch(e){ return ""; } }
+function mark(id){ document.querySelectorAll(".stn").forEach(g=>g.classList.toggle("on",g.dataset.id===id)); document.querySelectorAll("#stops button").forEach(b=>b.classList.toggle("on",b.dataset.id===id)); }
+function show(id){
+  setHash(id);
+  if(id==="about"||id==="next"){ mark(id); panel.innerHTML = id==="about"?ABOUT:CONTACT; return; }
+  const s=S[id]; if(!s){ show("about"); return; }
+  mark(id);
+  panel.innerHTML=`<div class="kind">${s.kind}</div><h2>${s.name}</h2>
+    <div class="lines">${s.lines.map(l=>`<span style="background:${LINES[l].color}">${LINES[l].name}</span>`).join("")}</div>
+    ${s.body}${s.repo?`<a class="go" href="${GH+s.repo}" target="_blank" rel="noopener">View the code on GitHub</a>`:""}`;
+}
+// legend filter
+const legend=document.getElementById("legend"); const active=new Set(Object.keys(LINES));
+for(const [k,l] of Object.entries(LINES)){
+  const b=document.createElement("button"); b.setAttribute("aria-pressed","true");
+  b.innerHTML=`<i style="background:${l.color}"></i>${l.name}`;
+  b.onclick=()=>{ const solo = active.size===1 && active.has(k);
+    active.clear(); if(solo) Object.keys(LINES).forEach(x=>active.add(x)); else active.add(k);
+    legend.querySelectorAll("button").forEach((bb,i)=>bb.setAttribute("aria-pressed",active.has(Object.keys(LINES)[i])));
+    for(const [kk,e] of Object.entries(lineEls)) e.classList.toggle("dim",!active.has(kk)); };
+  legend.appendChild(b);
+}
+eg.setAttribute("tabindex","0"); eg.setAttribute("role","button"); eg.setAttribute("aria-label","Your team? Contact Kriti");
+eg.addEventListener("click",()=>show("next"));
+eg.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){e.preventDefault();show("next");} });
+document.getElementById("stops").innerHTML = '<button data-id="about">About me</button>' +
+  ["intern","dev","dalhousie","market","hello","scooter","telemed","expense","course","hr","diab","hrm"].map(id=>`<button data-id="${id}">${S[id].name}${S[id].job&&S[id].yr?" ("+S[id].yr+")":""}</button>`).join("") +
+  '<button data-id="next">Contact</button>';
+document.getElementById("stops").addEventListener("click",e=>{ const b=e.target.closest("button"); if(b){ show(b.dataset.id); try{ panel.scrollIntoView({behavior:"smooth",block:"start"}); }catch(_){} } });
+show(getHash()||"about");
+</script>
+</body>
+</html>

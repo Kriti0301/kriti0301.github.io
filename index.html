@@ -37,7 +37,8 @@ h1{margin:0;font-size:clamp(30px,4.5vw,46px);font-weight:800;letter-spacing:-.01
 .tag{color:var(--muted);margin-top:6px;font-size:17px}
 .contact{display:flex;gap:10px;flex-wrap:wrap}
 .contact a{font-weight:600;text-decoration:none;border:2px solid var(--ink);border-radius:999px;padding:7px 16px 5px;font-size:15px}
-.contact a.pri{background:var(--ink);color:var(--map)}
+.contact a:hover{background:color-mix(in srgb,var(--ink) 8%,transparent)}
+.contact a.on,.contact a.on:hover{background:var(--ink);color:var(--map)}
 
 .legend{display:flex;flex-wrap:wrap;gap:8px 22px;margin:26px 0 14px;font-size:15px}
 .legend button{display:flex;align-items:center;gap:8px;background:none;border:0;padding:4px 0;font:inherit;color:var(--ink);cursor:pointer}
@@ -84,7 +85,7 @@ svg{display:block;width:100%;min-width:760px;height:auto}
 .panel .btns a.pri{background:var(--ink);color:var(--map)}
 .end{cursor:pointer}
 .end .yr{font:400 14px "Overpass",sans-serif;fill:var(--muted)}
-.end:hover rect,.end:focus-visible rect{fill:var(--fe)}
+.end:hover rect,.end:focus-visible rect,.end.on rect{fill:var(--fe)}
 footer{margin-top:28px;color:var(--muted);font-size:14px}
 </style>
 </head>
@@ -96,8 +97,8 @@ footer{margin-top:28px;color:var(--muted);font-size:14px}
       <p class="tag">Software developer. Every station is a job or project; every line is a skill I've used there.</p>
     </div>
     <div class="contact">
-      <a href="#about" data-about>About me</a>
-      <a class="pri" href="mailto:kritipatel013@gmail.com">Email me</a>
+      <a href="#about" data-about id="aboutBtn">About me</a>
+      <a href="mailto:kritipatel013@gmail.com">Email me</a>
       <a href="https://github.com/Kriti0301">GitHub</a>
     </div>
   </header>
@@ -216,7 +217,7 @@ const CONTACT=`<div class="kind">Next stop</div><h2>Your team?</h2>
   <div class="btns"><a class="pri" href="mailto:kritipatel013@gmail.com">kritipatel013@gmail.com</a><a href="https://github.com/Kriti0301">GitHub</a></div>`;
 function setHash(id){ try{ if(location.hash.slice(1)!==id) history.replaceState(null,"","#"+id); }catch(e){} }
 function getHash(){ try{ return location.hash.slice(1); }catch(e){ return ""; } }
-function mark(id){ document.querySelectorAll(".stn").forEach(g=>g.classList.toggle("on",g.dataset.id===id)); document.querySelectorAll("#stops button").forEach(b=>b.classList.toggle("on",b.dataset.id===id)); }
+function mark(id){ const ab=document.getElementById("aboutBtn"); ab.classList.toggle("on",id==="about"); if(id==="about") ab.setAttribute("aria-current","true"); else ab.removeAttribute("aria-current"); sg.classList.toggle("on",id==="about"); eg.classList.toggle("on",id==="next"); document.querySelectorAll(".stn").forEach(g=>g.classList.toggle("on",g.dataset.id===id)); document.querySelectorAll("#stops button").forEach(b=>b.classList.toggle("on",b.dataset.id===id)); }
 function show(id){
   setHash(id);
   if(id==="about"||id==="next"){ mark(id); panel.innerHTML = id==="about"?ABOUT:CONTACT; return; }

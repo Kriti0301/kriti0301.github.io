@@ -90,10 +90,11 @@ footer{margin-top:28px;color:var(--muted);font-size:14px}
 <div class="wrap">
   <header>
     <div>
-      <div class="sign"><div class="mark" aria-hidden="true"></div><h1>Kriti Jodhani</h1></div>
+      <a class="sign" href="#about" data-about style="text-decoration:none"><div class="mark" aria-hidden="true"></div><h1>Kriti Jodhani</h1></a>
       <p class="tag">Software developer. Every station is a job or project; every line is a skill I've used there.</p>
     </div>
     <div class="contact">
+      <a href="#about" data-about>About me</a>
       <a class="pri" href="mailto:kritipatel013@gmail.com">Email me</a>
       <a href="https://github.com/Kriti0301">GitHub</a>
     </div>
@@ -235,6 +236,8 @@ document.getElementById("stops").innerHTML = '<button data-id="about">About me</
   ["intern","dev","dalhousie","market","hello","scooter","telemed","expense","course","hr","diab","hrm"].map(id=>`<button data-id="${id}">${S[id].name}${S[id].job&&S[id].yr?" ("+S[id].yr+")":""}</button>`).join("") +
   '<button data-id="next">Contact</button>';
 document.getElementById("stops").addEventListener("click",e=>{ const b=e.target.closest("button"); if(b){ show(b.dataset.id); try{ panel.scrollIntoView({behavior:"smooth",block:"start"}); }catch(_){} } });
+document.querySelectorAll("[data-about]").forEach(a=>a.addEventListener("click",e=>{ e.preventDefault(); show("about"); try{ panel.scrollIntoView({behavior:"smooth",block:"nearest"}); }catch(_){} }));
+window.addEventListener("hashchange",()=>{ const h=getHash(); if(h) show(h); });
 show(getHash()||"about");
 </script>
 </body>

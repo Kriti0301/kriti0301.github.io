@@ -83,6 +83,8 @@ svg{display:block;width:100%;min-width:760px;height:auto}
 .panel .btns a{font-weight:600;text-decoration:none;border:2px solid var(--ink);border-radius:999px;padding:7px 15px 5px;font-size:15px}
 .panel .btns a.pri{background:var(--ink);color:var(--map)}
 .end{cursor:pointer}
+.end .yr{font:400 14px "Overpass",sans-serif;fill:var(--muted)}
+.end:hover rect,.end:focus-visible rect{fill:var(--fe)}
 footer{margin-top:28px;color:var(--muted);font-size:14px}
 </style>
 </head>
@@ -103,7 +105,7 @@ footer{margin-top:28px;color:var(--muted);font-size:14px}
   <div class="legend" id="legend" aria-label="Filter lines"></div>
 
   <div class="board">
-    <div class="mapcard"><svg id="map" viewBox="20 0 1080 560" role="img" aria-label="Transit map of Kriti's career and projects"></svg></div>
+    <div class="mapcard"><svg id="map" viewBox="-70 0 1170 560" role="img" aria-label="Transit map of Kriti's career and projects"></svg></div>
     <aside class="panel" id="panel" aria-live="polite"></aside>
   </div>
   <nav class="stops" aria-label="Stations"><h2>Stations</h2><div id="stops"></div></nav>
@@ -147,15 +149,15 @@ const S={
     body:"<ul><li>Python backend services and JSON data pipelines across 5+ municipal data sources</li><li>Resolved production data issues with SQL diagnostics</li><li>Power BI dashboards, requirements and technical documentation</li></ul>"},
 };
 const ROUTES={
-  fe:["intern","dev","dalhousie","market","hello","scooter","expense","course","END"],
-  data:["intern","dev","hr","diab","scooter","course","hrm","END"],
+  fe:["START","intern","dev","dalhousie","market","hello","scooter","expense","course","END"],
+  data:["START","intern","dev","hr","diab","scooter","course","hrm","END"],
   java:["dalhousie","market","telemed","END"],
   node:["hello","expense","END"],
   cloud:["scooter","expense","course","END"],
 };
-const END={x:1030,y:280};
+const END={x:1030,y:280}, START={x:-20,y:280};
 
-function pt(id,line){ if(id==="END") return {x:END.x,y:END.y+LINES[line].lane}; const s=S[id]; return {x:s.x,y:s.y+LINES[line].lane}; }
+function pt(id,line){ if(id==="END") return {x:END.x,y:END.y+LINES[line].lane}; if(id==="START") return {x:START.x,y:START.y+LINES[line].lane}; const s=S[id]; return {x:s.x,y:s.y+LINES[line].lane}; }
 // transit-style segment: straight then 45°
 function seg(a,b){
   const dx=b.x-a.x, dy=b.y-a.y, adx=Math.abs(dx), ady=Math.abs(dy);
@@ -178,6 +180,12 @@ for(const [k,r] of Object.entries(ROUTES)){
   lineEls[k]=el("path",{d,class:"ln",stroke:LINES[k].color});
 }
 // end station
+const sg=el("g",{class:"end start",tabindex:0,role:"button","aria-label":"About me"});
+el("rect",{x:START.x-14,y:START.y-24,width:28,height:48,rx:14,fill:"var(--ink)"},sg);
+const st1=el("text",{x:START.x,y:START.y-52,"text-anchor":"middle"},sg); st1.textContent="About me";
+const st2=el("text",{x:START.x,y:START.y-36,"text-anchor":"middle",class:"yr"},sg); st2.textContent="start here";
+sg.addEventListener("click",()=>show("about"));
+sg.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){e.preventDefault();show("about");} });
 const eg=el("g",{class:"end"});
 el("rect",{x:END.x-14,y:END.y-24,width:28,height:48,rx:14,fill:"var(--ink)"},eg);
 const et=el("text",{x:END.x,y:END.y-36,"text-anchor":"middle"},eg); et.textContent="Your team?";
